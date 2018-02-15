@@ -1,0 +1,1 @@
+/home/jesse/ros_workspaces/csc790_labs/devel_debug/.private/lab02_description/lib/pkgconfig/lab02_description.pc

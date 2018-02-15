@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="lab03">
+
+	  <xacro:macro name="wheel" params="reflect_lr suffix">
+
+        <!-- The name of the current wheel -->
+        <xacro:property name="wheel_name" value="${suffix}_wheel" />
+        
+        <!-- Create the wheel geometry (for visual debug and collisions) -->
+        <xacro:property name="wheel_geometry">
+            <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
+            <geometry>
+                <sphere radius="${wh_radius}" />
+            </geometry>
+        </xacro:property>
+
+         <link name="${wheel_name}">
+            <visual>
+                <xacro:insert_block name="wheel_geometry" />
+                <material name="black" />
+            </visual>
+            
+            <collision>
+                <xacro:insert_block name="wheel_geometry" />
+            </collision>
+            
+            <inertial>
+                <mass value="${wh_mass}" />
+                <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
+                <inertia
+                    ixx="${(1/12)*wh_mass*(3*wh_radius**2 + wh_length**2)}"
+                    ixy="0"
+                    ixz="0"
+                    iyy="${(1/12)*wh_mass*(3*wh_radius**2 + wh_length**2)}"
+                    iyz="0"
+                    izz="${(1/2)*wh_mass*wh_radius**2}"
+                    />
+            </inertial>
+        </link>
+
+        <joint name="${wheel_name}_joint" type="continuous">
+            <parent link="robot_chassis" />
+            <child link="${wheel_name}" />
+            <origin xyz = "${(ch_radius - wh_radius)*reflect_lr} 0 0" />
+            <axis xyz="0 1 0" />
+        </joint>
+    </xacro:macro>
+
+    <xacro:macro name="glide" params="reflect_lr suffix">
+
+        <!-- The name of the current wheel -->
+        <xacro:property name="glide_name" value="${suffix}_glide" />
+        
+        <!-- Create the wheel geometry (for visual debug and collisions) -->
+        <xacro:property name="glide_geometry">
+            <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
+            <geometry>
+                <sphere radius="${gl_radius}" />
+            </geometry>
+        </xacro:property>
+
+         <link name="${glide_name}">
+            <visual>
+                <xacro:insert_block name="glide_geometry" />
+                <material name="white" />
+            </visual>
+            
+            <collision>
+                <xacro:insert_block name="glide_geometry" />
+            </collision>
+            
+            <inertial>
+                <mass value="${gl_mass}" />
+                <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
+                <inertia
+                    ixx="${(1/12)*gl_mass*(3*gl_radius**2 + wh_length**2)}"
+                    ixy="0"
+                    ixz="0"
+                    iyy="${(1/12)*gl_mass*(3*gl_radius**2 + wh_length**2)}"
+                    iyz="0"
+                    izz="${(1/2)*gl_mass*gl_radius**2}"
+                    />
+            </inertial>
+        </link>
+
+        <joint name="${glide_name}_joint" type="fixed">
+            <parent link="robot_chassis" />
+            <child link="${glide_name}" />
+            <origin xyz = "0 ${(ch_radius - gl_radius)*reflect_lr} 0" />
+            <axis xyz="0 1 0" />
+        </joint>
+    </xacro:macro>
+    
+</robot>
