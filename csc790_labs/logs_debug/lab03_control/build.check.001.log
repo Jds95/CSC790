@@ -1,0 +1,4 @@
+CMake Error: The source directory "/home/jesse/ros_workspaces/csc790_labs/src/lab04/lab04_control" does not exist.
+Specify --help for usage, or press the help button on the CMake GUI.
+Makefile:304: recipe for target 'cmake_check_build_system' failed
+make: *** [cmake_check_build_system] Error 1

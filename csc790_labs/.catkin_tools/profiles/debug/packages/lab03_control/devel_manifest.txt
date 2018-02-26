@@ -1,0 +1,7 @@
+lab03/lab03_control
+/home/jesse/ros_workspaces/csc790_labs/devel_debug/.private/lab03_control/lib/pkgconfig/lab03_control.pc /home/jesse/ros_workspaces/csc790_labs/devel_debug/lib/pkgconfig/lab03_control.pc
+/home/jesse/ros_workspaces/csc790_labs/devel_debug/.private/lab03_control/lib/pkgconfig/lab04_control.pc /home/jesse/ros_workspaces/csc790_labs/devel_debug/lib/pkgconfig/lab04_control.pc
+/home/jesse/ros_workspaces/csc790_labs/devel_debug/.private/lab03_control/share/lab04_control/cmake/lab04_controlConfig-version.cmake /home/jesse/ros_workspaces/csc790_labs/devel_debug/share/lab04_control/cmake/lab04_controlConfig-version.cmake
+/home/jesse/ros_workspaces/csc790_labs/devel_debug/.private/lab03_control/share/lab04_control/cmake/lab04_controlConfig.cmake /home/jesse/ros_workspaces/csc790_labs/devel_debug/share/lab04_control/cmake/lab04_controlConfig.cmake
+/home/jesse/ros_workspaces/csc790_labs/devel_debug/.private/lab03_control/share/lab03_control/cmake/lab03_controlConfig.cmake /home/jesse/ros_workspaces/csc790_labs/devel_debug/share/lab03_control/cmake/lab03_controlConfig.cmake
+/home/jesse/ros_workspaces/csc790_labs/devel_debug/.private/lab03_control/share/lab03_control/cmake/lab03_controlConfig-version.cmake /home/jesse/ros_workspaces/csc790_labs/devel_debug/share/lab03_control/cmake/lab03_controlConfig-version.cmake

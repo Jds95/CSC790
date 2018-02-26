@@ -1,6 +1,6 @@
 set(_CATKIN_CURRENT_PACKAGE "lab03_description")
 set(lab03_description_VERSION "0.0.0")
-set(lab03_description_MAINTAINER "jesse <jesse@todo.todo>")
+set(lab03_description_MAINTAINER "ajc <ajc@todo.todo>")
 set(lab03_description_PACKAGE_FORMAT "2")
 set(lab03_description_BUILD_DEPENDS )
 set(lab03_description_BUILD_EXPORT_DEPENDS )

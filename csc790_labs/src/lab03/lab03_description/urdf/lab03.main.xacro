@@ -1,90 +1,63 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="lab03">
 
-	<!-- Include the parameters xacro flie -->
-    <xacro:include filename="$(find lab03_description)/urdf/lab03.parameters.xacro" />
 
-    <!-- Import colors defined for Rviz -->
-    <xacro:include filename="$(find lab03_description)/urdf/lab03.rvizmats.xacro" />
+
+    <!-- Include the parameters xacro flie -->
+    <xacro:include filename="$(find lab03_description)/urdf/lab03.parameters.xacro" />
 
     <!-- Include macros for creating all links and joints -->
     <xacro:include filename="$(find lab03_description)/urdf/lab03.macros.xacro" />
 
-    <!-- Add the Gazebo related elements -->
+    <!-- Include macros for creating all links and joints -->
+    <xacro:include filename="$(find lab03_description)/urdf/lab03.rvizmats.xacro" />
+
+    <!-- Camera in separate file for readability -->
+    <xacro:include filename="$(find lab03_description)/urdf/lab03.camera.xacro" />
+
+    <!-- Include gazebo elements -->
     <xacro:include filename="$(find lab03_description)/urdf/lab03.gazebo.xacro" />
 
 
-    <xacro:property name="robot_chassis_geo">
-    	<origin xyz="0 0 0" rpy="0 0 0" />
-        <geometry>
-        	<cylinder length="${ch_height}" radius="${ch_radius}"/>
-        </geometry>
-    </xacro:property>
 
+    <!-- Create a base link so that the robot can be away from the origin -->
     <link name="base_link" />
+
+    <!-- Create the robot chassis -->
     <link name="robot_chassis">
+
+        <!-- Create the chassis visual -->
         <visual>
-           <xacro:insert_block name="robot_chassis_geo" />
-            <material name="blue"/>
+            <xacro:create_cylinder_geometry radius="${chassis_radius}" length="${chassis_height}" />
+            <material name="white" />
         </visual>
 
+
+        <!-- The wheel's collision shape -->
         <collision>
-            <xacro:insert_block name="robot_chassis_geo" />
+            <xacro:create_cylinder_geometry radius="${chassis_radius}" length="${chassis_height}" />
         </collision>
 
-   		<inertial>
-            <mass value="${ch_mass}" />
-            <inertia
-                ixx="${(1/12)*ch_mass*(ch_width**2 + ch_height**2)}"
-                ixy="0"
-                ixz="0"
-                iyy="${(1/12)*ch_mass*(ch_height**2 + ch_height**2)}"
-                iyz="0"
-                izz="${(1/12)*ch_mass*(ch_height**2 + ch_width**2)}"
-                />
-        </inertial>
+
+        <!-- Create the chassis's inertial matrix -->
+        <xacro:create_cylinder_inertial
+            mass="${chassis_mass}" radius="${chassis_radius}"
+            length="${chassis_height}"/>
+
     </link>
 
-    <joint name="base_link_joint" type="fixed">
-        <origin xyz="0 0 ${z_offset}" rpy="0 0 0" />
+    <joint name="chassis_joint" type="fixed">
         <parent link="base_link" />
         <child link="robot_chassis" />
+        <origin xyz="0 0 ${vertical_offset}" />
     </joint>
 
-    <xacro:wheel reflect_lr="1" suffix="left" />s
-    <xacro:wheel reflect_lr="-1" suffix="right"/>
-    <xacro:glide reflect_lr="1" suffix="front"/> 
-    <xacro:glide reflect_lr="-1" suffix="back" />
+    <!-- Create the robot wheels -->
+    <xacro:create_wheel reflect_lr="1" wheel_id="left" parent_name="robot_chassis" />
+    <xacro:create_wheel reflect_lr="-1" wheel_id="right" parent_name="robot_chassis" />
 
-  <!-- Camera -->
-  <link name="camera_link">
-        <visual>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-                <geometry>
-                    <box size="${camera_link} ${camera_link} ${camera_link}"/>
-                </geometry>
-                <material name="red"/>
-        </visual>
-        
-        <collision>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-                <geometry>
-                    <box size="${camera_link} ${camera_link} ${camera_link}"/>
-                </geometry>
-        </collision>
-
-        <inertial>
-            <mass value="1e-5" />
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-            <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
-        </inertial>
-  </link>
-
-    <joint name="camera_joint" type="fixed">
-        <axis xyz="0 1 0" />
-        <origin xyz="0 0 ${z_offset / 2}" rpy="0 0 0" />
-        <parent link="robot_chassis"/>
-        <child link="camera_link"/>
-</joint>
+    <!-- Create the robot gliders -->
+    <xacro:create_glide reflect_fr="1" glide_id="front" parent_name="robot_chassis" />
+    <xacro:create_glide reflect_fr="-1" glide_id="rear" parent_name="robot_chassis" />
 
 </robot>
