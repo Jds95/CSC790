@@ -26,20 +26,37 @@ def run_control_publisher():
 	control_publisher = rospy.Publisher('/lab04/cmd_vel', Twist, queue_size=1)
 	rate = rospy.Rate(10)
 
-
 	vel_msg= Twist()
-	vel_msg.linear.x=0
+	vel_msg.linear.x=0.5
 	vel_msg.linear.y=0
 	vel_msg.linear.z=0
 	vel_msg.angular.x=0
 	vel_msg.angular.y=0
-	vel_msg.angular.z=0
+	vel_msg.angular.z=0.5
 
 	while not rospy.is_shutdown():
+		if g_orange_left_frac == 0 and g_orange_right_frac > 0:
+			vel_msg.angular.z = -.5
+
+		if g_orange_left_frac > 0 and g_orange_right_frac == 0:
+			vel_msg.angular.z = 0.5
+
+		if g_orange_left_frac > g_orange_right_frac:
+			vel_msg.angular.z = 0.25
+
+		if g_orange_left_frac < g_orange_right_frac:
+			vel_msg.angular.z = -0.25
+
+		if g_orange_left_frac == g_orange_right_frac:
+			vel_msg.angular.z = 0.5
+
 		control_publisher.publish(vel_msg)
 		rate.sleep()
 
+
+
 if __name__ == '__main__':
+
 	rospy.init_node('orange_frac_controller', anonymous=True)
 	rospy.Subscriber('/lab04/orange_frac', String, frac_callback)
 
