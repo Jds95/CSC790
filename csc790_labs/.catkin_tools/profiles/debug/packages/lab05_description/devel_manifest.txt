@@ -1,0 +1,4 @@
+lab05/lab05_description
+/home/jesse/ros_workspaces/csc790_labs/devel_debug/.private/lab05_description/lib/pkgconfig/lab05_description.pc /home/jesse/ros_workspaces/csc790_labs/devel_debug/lib/pkgconfig/lab05_description.pc
+/home/jesse/ros_workspaces/csc790_labs/devel_debug/.private/lab05_description/share/lab05_description/cmake/lab05_descriptionConfig-version.cmake /home/jesse/ros_workspaces/csc790_labs/devel_debug/share/lab05_description/cmake/lab05_descriptionConfig-version.cmake
+/home/jesse/ros_workspaces/csc790_labs/devel_debug/.private/lab05_description/share/lab05_description/cmake/lab05_descriptionConfig.cmake /home/jesse/ros_workspaces/csc790_labs/devel_debug/share/lab05_description/cmake/lab05_descriptionConfig.cmake
